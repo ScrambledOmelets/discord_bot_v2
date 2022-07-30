@@ -10,7 +10,6 @@ client.once('ready', () => {
 	console.log('Ready!');
 });
 
-//setting up 3 commands at once
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -18,10 +17,8 @@ client.on('interactionCreate', async interaction => {
 
 	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
-	} else if (commandName === 'server') {
-		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}\nServer creation date: ${interaction.guild.createdAt}`);
-	} else if (commandName === 'user') {
-		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour avatar: ${interaction.user.avatar}`);
+	} else if (commandName === 'beep') {
+		await interaction.reply('Boop!');
 	}
 });
 
