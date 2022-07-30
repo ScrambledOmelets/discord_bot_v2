@@ -9,8 +9,10 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('replies with pong!'),
-    async exceute(interaction) {
+    async execute(interaction) {
         //code goes here
         await interaction.reply('Pong!');
     },
 };
+
+//changed from an await in line 14 to a return
