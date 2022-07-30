@@ -1,17 +1,30 @@
-const { Client, Intents } = require("discord.js");
-// The Client and Intents are destructured from discord.js, since it exports an object by default. Read up on destructuring here https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+// Require the necessary discord.js classes
+const { Client, GatewayIntentBits } = require('discord.js');
+const { token } = require('./config.json');
+
+// Create a new client instance
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+// When the client is ready, run this code (only once)
+client.once('ready', () => {
+	console.log('Ready!');
 });
 
-client.on("ready", () => {
-  console.log("I am ready!");
+//setting up 3 commands at once
+client.on('interactionCreate', async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const { commandName } = interaction;
+
+	if (commandName === 'ping') {
+		await interaction.reply('Pong!');
+	} else if (commandName === 'server') {
+		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}\nServer creation date: ${interaction.guild.createdAt}`);
+	} else if (commandName === 'user') {
+		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour avatar: ${interaction.user.avatar}`);
+	}
 });
 
-client.on("messageCreate", (message) => {
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
-  }
-});
 
-client.login(TOKEN);
+// Login to Discord with your client's token
+client.login(token);
