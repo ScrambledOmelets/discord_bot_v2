@@ -12,6 +12,10 @@ module.exports = {
     async execute(interaction) {
         //code goes here
         await interaction.reply('Pong!');
+        //await wait(60); //doesnt work, idk why
+        await interaction.editReply(`If you thought I was going to say "Pong!", you're highly mistaken, ${interaction.user.tag}.`)
+        await interaction.deleteReply();
+        //await interaction.followUp('Pong again >:)'); //double replies
     },
 };
 
