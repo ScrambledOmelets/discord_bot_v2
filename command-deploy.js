@@ -17,10 +17,28 @@ for (const file of commandFiles) {
 const rest = new REST({ version: '10' }).setToken(token);
 
 //allows new commands to be added
+//adds commands globally
+(async () => {
+	try {
+		console.log('Started refreshing application (/) commands.');
 
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+		await rest.put(
+			Routes.applicationCommands(clientId),
+			{ body: commands },
+		);
+
+		console.log('Successfully reloaded application (/) commands.');
+	} catch (error) {
+		console.error(error);
+	}
+})();
+
+
+
+//old v2
+/*rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
-	.catch(console.error);
+	.catch(console.error);*/
 
 //old
 /*const { SlashCommandBuilder, Routes } = require('discord.js');
