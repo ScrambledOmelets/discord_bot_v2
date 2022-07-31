@@ -6,6 +6,7 @@ const { token } = require('./config.json');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+//searches files and creates collection of commands
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -18,14 +19,23 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
+//does the same thing as above but for events
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
 
-// When the client is ready, run this code (only once)
-client.once('ready', () => {
-	console.log('Ready!');
-});
 
 //gotta replace this too soon
+//has been fixed up??? for command handling
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -42,9 +52,8 @@ client.on('interactionCreate', async interaction => {
 });
 
 
-
-
 //always run "node command-deploy.js" to register new commands!
+//can still do node index.js to run the bot
 
 // Login to Discord with your client's token
 client.login(token);
