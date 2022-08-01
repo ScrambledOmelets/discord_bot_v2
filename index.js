@@ -4,7 +4,7 @@ const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
 //searches files and creates collection of commands
 client.commands = new Collection();
