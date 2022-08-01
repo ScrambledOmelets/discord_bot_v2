@@ -4,7 +4,7 @@ const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers] });
 
 //searches files and creates collection of commands
 client.commands = new Collection();
@@ -50,6 +50,14 @@ client.on('interactionCreate', async interaction => {
         await interaction.reply({ content: 'There was an error while executing this command :(', ephemeral: true });
     }
 });
+
+//message interactioin event
+/*client.on('messageCreate', message => {
+	if (message.content.startsWith('foo')) {
+		message.channel.send('bar');
+	}
+});*/
+
 
 
 //always run "node command-deploy.js" to register new commands!
