@@ -13,7 +13,7 @@ module.exports = {
         //code goes here
         await interaction.reply('Pong!');
         //await wait(60); //doesnt work, idk why
-        await interaction.followUp(`If you thought I was going to say "Pong Again!", you're highly mistaken, ${interaction.user.tag}.`)
+        await interaction.followUp(`If you thought I was going to say "Pong Again!", you're highly mistaken, ${interaction.member.nickname}.`)
         //await interaction.deleteReply();
         //await interaction.followUp('Pong again >:)'); //double replies
     },
