@@ -8,10 +8,12 @@ module.exports = {
     name: 'messageCreate',
     once: false,
     execute(message) {
-        if (message.content == 'left') {
+        if (message.content.toLowerCase() == 'left') {
 		message.channel.send('right');
         } else if (message.content.toLowerCase() == 'i hate you') {
             message.channel.send(`I hate you too, you meanie :P`);
+        } else if (message.content.toLowerCase() == 'how are you') {
+            message.channel.send('I\'m dead inside, thanks for asking!');
         }
     },
 };
