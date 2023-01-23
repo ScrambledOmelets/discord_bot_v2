@@ -1,3 +1,6 @@
+//in config.json: changed the guild id from the old server (test server) to the new serber (writing one)
+//the bot still works fine in both for some reason
+
 // Require the necessary discord.js classes
 const fs = require('node:fs');
 const path = require('node:path');
