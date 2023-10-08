@@ -4,7 +4,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('command_list')
+        .setName('commands')
         .setDescription('sends a list of commans'),
     async execute(interaction) {
         await interaction.reply('filler text');
